@@ -1,0 +1,36 @@
+{% load static %}
+<!-- {% load chunks %} -->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>All Products</h2>
+      
+    </div>
+    <div class="row">
+        {% for product in product_list %}
+        <div class="col-4">
+            <a href="{% url 'product_detail' product.id %}"><img src="{{product.image.url}}"></a>
+            <h4>{{ product.title }}</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>${{product.price}}</p>
+        </div>
+        {% endfor %}
+        </div>
+    <div class="page-btn">
+        {% if product_list.has_previous %}
+        <a href="?page={{product_list.previous_page_number}}"> <span><<</span></a>
+        {% endif %}
+        {% for i in product_list.paginator.page_range %}
+       <a href="?page={{i}}"> <span>{{i}}</span></a>
+       {% endfor %}
+       {% if product_list.has_next %}
+       <a href="?page={{product_list.next_page_number}}"> <span>>></span></a>
+       {% endif %}
+       
+    </div>
+</div>
